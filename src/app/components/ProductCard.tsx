@@ -23,7 +23,16 @@ export default function ProductCard({ icon, nameKey, link, index }: ProductCardP
       <div className="flex flex-col gap-[16px] md:gap-[24px]">
         <div className="flex gap-[12px] md:gap-[16px] items-center">
           <div className="w-[48px] h-[48px] md:w-[56px] md:h-[56px] lg:w-[64px] lg:h-[64px] rounded-[12px] md:rounded-[16px] overflow-hidden flex-shrink-0 transition-transform duration-300 hover:scale-110">
-            <img alt={product.name} className="w-full h-full object-cover" src={icon} loading="lazy" />
+          <img
+              alt={product.name}
+              className="w-full h-full object-cover"
+              src={icon}
+              width={128}
+              height={128}
+              sizes="(max-width: 768px) 48px, (max-width: 1024px) 56px, 64px"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <h3 className="font-['Space_Grotesk:Bold',sans-serif] font-semibold text-[22px] leading-[26px] md:text-[26px] md:leading-[29px] lg:text-[28px] lg:leading-[31.2px] text-white">
             {product.name}

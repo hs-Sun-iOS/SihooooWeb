@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 import ProductCard from "./ProductCard";
 import { useLanguage } from "../context/LanguageContext";
-import imgBackground from "../../imports/Html→Body/0ecc8e143a4108bc43489e38d071dd94f5ea7692.png";
-import imgBackground1 from "../../imports/Html→Body/be8f3062f36a0087ceb22f6902862e91403ef53d.png";
-import imgBackground2 from "../../imports/Html→Body/d6be3976208291a5c1f38dfcb8b7e72b82d8566f.png";
-import imgBackground3 from "../../imports/Html→Body/ddab898a9f25d3bad3d0118e8626493a121fc5ca.png";
+import imgBackground from "@/imports/Html→Body/0ecc8e143a4108bc43489e38d071dd94f5ea7692.png?w=256&format=webp&quality=86";
+import imgBackground1 from "@/imports/Html→Body/be8f3062f36a0087ceb22f6902862e91403ef53d.png?w=256&format=webp&quality=86";
+import imgBackground2 from "@/imports/Html→Body/d6be3976208291a5c1f38dfcb8b7e72b82d8566f.png?w=256&format=webp&quality=86";
+import imgBackground3 from "@/imports/Html→Body/ddab898a9f25d3bad3d0118e8626493a121fc5ca.png?w=256&format=webp&quality=86";
 
 export default function Products() {
   const { t } = useLanguage();

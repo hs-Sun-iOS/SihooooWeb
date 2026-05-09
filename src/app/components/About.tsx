@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import svgPaths from "../../imports/Html→Body/svg-5it421s66b";
-import imgRectangle1 from "../../imports/Html→Body/99cf8bac96625ff695e402e103c14b8dcbb223d9.png";
-import imgRectangle2 from "../../imports/Html→Body/2bbd51ba30061e5c875dfc0c9bf05685523a5335.png";
+import imgRectangle1 from "@/imports/Html→Body/99cf8bac96625ff695e402e103c14b8dcbb223d9.png?w=720&format=webp&quality=82";
+import imgRectangle2 from "@/imports/Html→Body/2bbd51ba30061e5c875dfc0c9bf05685523a5335.png?w=720&format=webp&quality=82";
 import { useLanguage } from "../context/LanguageContext";
 import ContactModal from "./ContactModal";
 

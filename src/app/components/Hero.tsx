@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import imgOverlayBlur from "../../imports/Html→Body/e2efdef9427bfc0b196560064771ee9e20f96bf0.png";
+import imgOverlayBlur from "@/imports/Html→Body/e2efdef9427bfc0b196560064771ee9e20f96bf0.png?w=1920&format=webp&quality=82";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function Hero() {
@@ -30,7 +30,10 @@ export default function Hero() {
           alt=""
           className="w-full h-full md:h-[809px] object-cover rounded-[12px]"
           src={imgOverlayBlur}
-          loading="lazy"
+          width={1920}
+          height={1080}
+          decoding="async"
+          fetchPriority="high"
         />
       </div>
 
