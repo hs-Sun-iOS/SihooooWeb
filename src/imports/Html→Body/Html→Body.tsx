@@ -514,7 +514,7 @@ function Container30() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Container">
       <div className="flex flex-col font-['Inter:Regular',sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[16px] text-white whitespace-nowrap">
-        <p className="leading-[24px]">min@Sihoooo.cn</p>
+        <p className="leading-[24px]">min@sihoooo.cn</p>
       </div>
     </div>
   );
@@ -725,7 +725,7 @@ function Link5() {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0" data-name="Link">
       <div className="flex flex-col font-['Inter:Regular',sans-serif] font-normal justify-center leading-[0] not-italic relative shrink-0 text-[#d7c2f8] text-[16px] whitespace-nowrap">
-        <p className="leading-[24px]">min@Sihoooo.cn</p>
+        <p className="leading-[24px]">min@sihoooo.cn</p>
       </div>
     </div>
   );

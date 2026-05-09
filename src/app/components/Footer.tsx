@@ -27,6 +27,7 @@ export default function Footer() {
               {t.footer.address}
             </p>
             <button
+              type="button"
               onClick={() => setIsModalOpen(true)}
               className="font-['Inter:Regular',sans-serif] font-normal text-[13px] md:text-[14px] lg:text-[16px] leading-[20px] md:leading-[22px] lg:leading-[24px] text-[#d7c2f8] hover:text-[#e9d9ff] transition-colors text-left md:text-right"
             >

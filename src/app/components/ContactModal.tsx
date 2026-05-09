@@ -1,5 +1,7 @@
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
+import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "motion/react";
+import { getEmailJsConfig, isEmailJsConfigured, formatEmailJsErrorDetail } from "@/config/emailjs";
 import { useLanguage } from "../context/LanguageContext";
 
 interface ContactModalProps {
@@ -13,30 +15,40 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorDetail, setErrorDetail] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      setStatus("idle");
+      setErrorDetail("");
+    }
+  }, [isOpen]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    if (!isEmailJsConfigured()) {
+      setErrorDetail("");
+      setStatus("error");
+      return;
+    }
+
+    const { publicKey, serviceId, templateId } = getEmailJsConfig();
+    setErrorDetail("");
     setStatus("sending");
 
-    // Simulate email sending
-    setTimeout(() => {
-      // Log the message to console (can be replaced with real email service later)
-      console.log("📧 New Contact Form Submission:");
-      console.log("Name:", name);
-      console.log("Email:", email);
-      console.log("Message:", message);
-      console.log("To:", "min@Sihoooo.cn");
-
-      // Save to localStorage for record keeping
-      const submissions = JSON.parse(localStorage.getItem("contactSubmissions") || "[]");
-      submissions.push({
-        name,
-        email,
-        message,
-        timestamp: new Date().toISOString()
-      });
-      localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
-
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: name,
+          from_email: email,
+          reply_to: email,
+          message,
+        },
+        { publicKey }
+      );
       setStatus("success");
       setTimeout(() => {
         setName("");
@@ -45,7 +57,11 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         setStatus("idle");
         onClose();
       }, 2000);
-    }, 1500);
+    } catch (err) {
+      console.error("[EmailJS]", err);
+      setErrorDetail(formatEmailJsErrorDetail(err));
+      setStatus("error");
+    }
   };
 
   return (
@@ -127,13 +143,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 )}
 
                 {status === "error" && (
-                  <motion.p
-                    className="text-red-400 text-sm"
+                  <motion.div
+                    className="flex flex-col gap-2"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
-                    {t.contact.error}
-                  </motion.p>
+                    <p className="text-red-400 text-sm">
+                      {!isEmailJsConfigured() ? t.contact.configMissing : t.contact.error}
+                    </p>
+                    {isEmailJsConfigured() && errorDetail ? (
+                      <p className="text-red-300/90 text-xs font-mono whitespace-pre-wrap break-words leading-relaxed">
+                        {errorDetail}
+                      </p>
+                    ) : null}
+                    {isEmailJsConfigured() ? (
+                      <p className="text-white/45 text-xs leading-relaxed">{t.contact.errorHintShort}</p>
+                    ) : null}
+                  </motion.div>
                 )}
 
                 <button
